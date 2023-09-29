@@ -1,14 +1,16 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/firebase.config";
-import { Result } from "postcss";
+import { useState } from "react";
 const Login = () => {
+  const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
   const auth = getAuth(app);
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+        const googleUser = result.user;
+        console.log(googleUser);
+        setUser(googleUser);
       })
       .catch((error) => {
         const errorSMS = error.message;
@@ -24,6 +26,7 @@ const Login = () => {
         >
           Login with google
         </button>
+        <div>user: {user?.displayName}</div>
       </div>
     </div>
   );
