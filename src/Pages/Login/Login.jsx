@@ -28,6 +28,7 @@ const Login = () => {
     signInWithPopup(auth, githubProvider)
       .then((result) => {
         const githuUser = result.user;
+        console.log(githuUser);
         setUser(githuUser);
       })
       .catch((error) => {
@@ -75,6 +76,10 @@ const Login = () => {
           <div>
             <div>User: {user?.displayName}</div>
             <div>Email: {user?.email}</div>
+            <div>
+              Photo:
+              <img className="w-28" src={user?.photoURL} alt="" />
+            </div>
           </div>
         )}
       </div>
